@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-const Dashboard = () => {
+const SummaryReports = () => {
   return (
     <View className="w-full h-40">
       <View className="flex-row justify-center items-center p-2">
@@ -22,4 +22,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default SummaryReports;

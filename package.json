@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
+    "axios": "^1.4.0",
     "expo": "~48.0.18",
     "expo-barcode-scanner": "~12.3.2",
     "expo-sensors": "~12.1.1",
@@ -22,7 +23,8 @@
     "tailwindcss": "^3.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "react-native-dotenv": "^3.4.8"
   },
   "private": true
 }

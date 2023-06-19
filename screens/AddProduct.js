@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Button, ScrollView, Text, TextInput, View } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { useForm, Controller } from "react-hook-form";
+import hooks from "../src/hooks/AddProducts";
 
 const AddProduct = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [barcode, setBarcode] = useState("Not yet scanned");
+  const { mutate } = hooks.useAddProducts();
 
   const {
     control,
@@ -31,7 +33,7 @@ const AddProduct = () => {
   const onSubmit = (data) => {
     data.barcode = barcode;
     data.id = barcode;
-    console.log(data);
+    mutate(data);
   };
 
   // Request Camera Permission

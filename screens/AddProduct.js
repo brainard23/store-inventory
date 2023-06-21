@@ -8,7 +8,7 @@ const AddProduct = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [barcode, setBarcode] = useState("Not yet scanned");
-  const { mutate } = hooks.useAddProducts();
+  const { mutate, status } = hooks.useAddProducts();
 
   const {
     control,

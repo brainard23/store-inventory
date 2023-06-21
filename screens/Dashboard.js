@@ -1,29 +1,10 @@
 import { Text, View, Button } from "react-native";
 import SummaryReports from "../components/SummaryReports";
 import { VirtualizedList } from "react-native";
-import { useEffect } from "react";
-import axios from "axios";
+import hooks from "../src/hooks/AddProducts";
 
 const Dashboard = ({ navigation }) => {
-  const getItem = (_data, index) => ({
-    id: Math.random().toString(12).substring(0),
-    title: `Item ${index + 1}`,
-    stocks: Math.floor(Math.random() * 100),
-  });
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await axios.get("http://10.0.2.2:8000/api/v5/logs/get_user_activity_logs?from=2023-05-28&page=1&per_page=2&model=Permission&to=2023-06-10&search=");
-        console.log(data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchData()
-  });
-
-  const getItemCount = (_data) => 50;
+  const { data, isFetching, refetch } = hooks.useGetItems();
 
   const Item = ({ title, stocks }) => (
     <View className="flex-row justify-between items-center w-full bg-red-300 h-12 my-1 px-1">
@@ -46,6 +27,9 @@ const Dashboard = ({ navigation }) => {
           onPress={() => navigation.navigate("Add Product")}
         />
       </View>
+      {
+        isFetching && <Text>fetching...</Text>
+      }
       <VirtualizedList
         style={{
           width: "100%",
@@ -54,11 +38,11 @@ const Dashboard = ({ navigation }) => {
         }}
         initialNumToRender={4}
         renderItem={({ item }) => (
-          <Item title={item.title} stocks={item.stocks} />
+          <Item title={item?.name} stocks={item?.quantity} />
         )}
-        keyExtractor={(item) => item.id}
-        getItemCount={getItemCount}
-        getItem={getItem}
+        getItemCount={(data) => data?.length}
+        getItem={(data, index) => data[index]}
+        data={data}
       />
     </View>
   );

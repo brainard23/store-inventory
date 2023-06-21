@@ -1,9 +1,14 @@
-import Axios from "axios";
+import axios from "axios";
 
-const baseUrl = import.meta.env.BASE_URL;
+const baseUrl = 'http://10.0.2.2:8000'
 
-const apiService = Axios.create();
+const apiService = axios.create({
+    baseURL: 'http://10.0.2.2:8000/api', 
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
-apiService.defaults.baseURL = baseUrl;
+// apiService.defaults.baseURL = baseUrl;
 
 export default apiService;
